@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcryptjs"; // REMOVE this line
 import Admin from "../model/Adminschema.js";
 import Project from "../model/projectschema.js";
 // import imageSchema from "../model/imageschema.js"; // If needed
