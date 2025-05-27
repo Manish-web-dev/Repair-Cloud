@@ -140,7 +140,7 @@ body::before {
     .gallery-img-box {
         width: 98vw;
         height: 55vw;
-        min-height: 180px;
+        min-height: 180px; 
         max-width: 99vw;
     }
 }
