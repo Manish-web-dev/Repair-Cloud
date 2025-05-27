@@ -1,0 +1,146 @@
+body {
+    /* fallback for browsers that don't support gradients */
+    background: #f5f7fa;
+    /* animated gradient background */
+    background: linear-gradient(-45deg, #f5f7fa, #c3cfe2, #e0c3fc, #8ec5fc, #e0c3fc, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientBG 18s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    25% {background-position: 50% 100%;}
+    50% {background-position: 100% 50%;}
+    75% {background-position: 50% 0%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* Optional: add a subtle overlay for more contrast */
+body::before {
+    content: "";
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.03) 100%);
+}
+
+/* Make sure gallery content is above the background overlay */
+.gallery-grid, header, .heading, .btn {
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3.5rem; /* Increased gap for more space between boxes */
+    justify-content: center;
+    margin: 3rem 0 2rem 0;
+    animation: fadeInUp 1s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+
+.gallery-img-box {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+    background: #fff;
+    width: 320px;   /* Increased size */
+    height: 320px;  /* Increased size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.4s;
+    animation: popIn 0.7s cubic-bezier(.4,2,.6,1);
+    /* Add floating animation */
+    will-change: transform;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8);}
+    100% { opacity: 1; transform: scale(1);}
+}
+
+/* Floating animation on hover */
+.gallery-img-box:hover {
+    transform: scale(1.09) rotate(-2deg) translateY(-12px);
+    box-shadow: 0 16px 48px rgba(60,60,100,0.22);
+    z-index: 2;
+    animation: floatBox 1.2s infinite alternate cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes floatBox {
+    0% { transform: scale(1.09) rotate(-2deg) translateY(-12px);}
+    100% { transform: scale(1.13) rotate(-2.5deg) translateY(-22px);}
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s, transform 0.3s;
+    filter: grayscale(10%) brightness(0.97);
+}
+
+.gallery-img-box:hover .gallery-img {
+    filter: grayscale(0%) brightness(1.07);
+    transform: scale(1.06) rotate(1deg);
+}
+
+/* Modal preview animation */
+#galleryPreviewModal {
+    animation: modalFadeIn 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes modalFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#galleryPreviewModal img {
+    animation: imgPop 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes imgPop {
+    0% { opacity: 0; transform: scale(0.92);}
+    100% { opacity: 1; transform: scale(1);}
+}
+
+/* Modal close button animation */
+#closePreviewModal {
+    transition: color 0.2s, transform 0.2s;
+}
+
+#closePreviewModal:hover {
+    color: #5d5fef;
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Fallback image style */
+.gallery-img[alt="Image not found"] {
+    filter: grayscale(100%) brightness(1.2);
+    background: repeating-linear-gradient(45deg, #eee, #eee 10px, #ddd 10px, #ddd 20px);
+    color: #888;
+    object-fit: contain;
+    border: 2px dashed #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .gallery-img-box {
+        width: 98vw;
+        height: 55vw;
+        min-height: 180px;
+        max-width: 99vw;
+    }
+}

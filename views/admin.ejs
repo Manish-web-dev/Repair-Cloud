@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav_bar">
+
+            <div class="nav_logo">Repair Cloud</div>
+            <div class="nav_btns">
+                <a class="btn btn_primary" id="home" href="/">Home</a>
+                <a class="btn btn_secondary" id="openProjectModal" href="javascript:void(0);">Post project</a>
+                <a class="btn btn_primary" id="logout" href="/logout" style="margin-left:1rem;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Project Number</th>
+                        <th>Image</th>
+                        <th>Project description</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="projectTableBody">
+                    <% if (typeof projects !=='undefined' && projects.length> 0) { %>
+                        <% projects
+                            .slice()
+                            .sort((a, b) => (a.projectNumber > b.projectNumber ? 1 : -1))
+                            .forEach(function(p) { %>
+                            <tr data-id="<%= p._id %>">
+                                <td><%= p.projectNumber %></td>
+                                <td>
+                                    <% if (p.imageUrl) { %>
+                                        <img src="<%= p.imageUrl %>" alt="img"
+                                            style="width:60px;height:60px;object-fit:cover;">
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <div style="white-space: pre-line; word-break: break-word; max-width:250px;">
+                                        <%= p.description %>
+                                    </div>
+                                </td>
+                                <td><%= p.date ? p.date.toISOString().slice(0,10) : '' %></td>
+                                <td>
+                                    <button class="edit-btn btn btn_secondary" data-id="<%= p._id %>">Edit</button>
+                                    <button class="delete-btn btn btn_primary" data-id="<%= p._id %>">Delete</button>
+                                    <% if (!p.completed) { %>
+                                        <button class="complete-btn btn btn_success" data-id="<%= p._id %>">Completed</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5">No projects found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <!-- Pagination Controls -->
+            <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+                <div style="margin: 2rem 0; text-align: center;">
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <% if (i === page) { %>
+                            <span style="margin:0 0.5rem; font-weight:bold; color:var(--primary-color);"><%= i %></span>
+                        <% } else { %>
+                            <a href="/admin?page=<%= i %>" style="margin:0 0.5rem; color:var(--primary-color); text-decoration:underline;"><%= i %></a>
+                        <% } %>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        <!-- GALLERY SECTION -->
+        <div style="margin-top:3rem;">
+            <h2>Gallery Images</h2>
+            <!-- Add Photos button above gallery table -->
+            <div style="text-align:left; margin:1.5rem 0;">
+                <button id="openGalleryModal" class="btn btn_primary" style="font-size:1rem;padding:0.6em 1.5em;">
+                    <i class="fa fa-plus"></i> Add Photos
+                </button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="galleryTableBody">
+                    <!-- Filled by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Project Modal Form -->
+    <div id="projectModal"
+        style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+        <div class="modern-modal-card">
+            <span id="closeProjectModal" class="modern-close-btn">&times;</span>
+            <h2 class="modern-modal-title">Post Project</h2>
+            <form action="/projects" id="projectForm" method="POST" enctype="multipart/form-data" class="modern-form">
+                <div class="modern-form-group">
+                    <input type="text" id="projectNumber" name="projectNumber" required class="modern-input"
+                        autocomplete="off">
+                    <label for="projectNumber" class="modern-label">Project Number</label>
+                </div>
+                <div class="modern-form-group">
+                    <input type="file" id="image" name="image" accept="image/*" required class="modern-input-file">
+                    <label for="image" class="modern-label-file">Image</label>
+                </div>
+                <div class="modern-form-group">
+                    <textarea id="description" name="description" rows="3" required class="modern-input"></textarea>
+                    <label for="description" class="modern-label">Description</label>
+                </div>
+                <div class="modern-form-group">
+                    <input type="date" id="date" name="date" required class="modern-input">
+                    <label for="date" class="modern-label">Last Date</label>
+                </div>
+                <button type="submit" class="modern-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="editProjectModal"
+        style="display:none; position:fixed; z-index:1001; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+        <div class="modern-modal-card">
+            <span id="closeEditProjectModal" class="modern-close-btn">&times;</span>
+            <h2 class="modern-modal-title">Edit Project</h2>
+            <form id="editProjectForm" enctype="multipart/form-data" class="modern-form">
+                <input type="hidden" id="editProjectId" name="id">
+                <div class="modern-form-group">
+                    <input type="text" id="editProjectNumber" name="projectNumber" required class="modern-input"
+                        autocomplete="off">
+                    <label for="editProjectNumber" class="modern-label">Project Number</label>
+                </div>
+                <div class="modern-form-group">
+                    <input type="file" id="editImage" name="image" accept="image/*" class="modern-input-file">
+                    <label for="editImage" class="modern-label-file">Image (leave blank to keep current)</label>
+                </div>
+                <div class="modern-form-group">
+                    <textarea id="editDescription" name="description" rows="3" required class="modern-input"></textarea>
+                    <label for="editDescription" class="modern-label">Description</label>
+                </div>
+                <div class="modern-form-group">
+                    <input type="date" id="editDate" name="date" required class="modern-input">
+                    <label for="editDate" class="modern-label">Last Date</label>
+                </div>
+                <button type="submit" class="modern-btn">Update</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gallery Modal Form -->
+    <div id="galleryModal"
+        style="display:none; position:fixed; z-index:1002; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); align-items:center; justify-content:center;">
+        <div class="modern-modal-card">
+            <span id="closeGalleryModal" class="modern-close-btn">&times;</span>
+            <h2 class="modern-modal-title">Add Gallery Image</h2>
+            <form id="galleryForm" enctype="multipart/form-data" class="modern-form">
+                <div class="modern-form-group">
+                    <input type="file" id="galleryImage" name="image" accept="image/*" required class="modern-input-file">
+                    <label for="galleryImage" class="modern-label-file">Image</label>
+                </div>
+                <button type="submit" class="modern-btn">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+
+</body>
+
+</html>

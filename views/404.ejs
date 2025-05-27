@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 Not Found</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(-45deg, #f5f7fa, #c3cfe2, #e0c3fc, #8ec5fc, #e0c3fc, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            25% {background-position: 50% 100%;}
+            50% {background-position: 100% 50%;}
+            75% {background-position: 50% 0%;}
+            100% {background-position: 0% 50%;}
+        }
+        .notfound-container {
+            text-align: center;
+            background: rgba(255,255,255,0.95);
+            padding: 3rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60,60,100,0.13);
+        }
+        .notfound-container h1 {
+            font-size: 5rem;
+            color: #5d5fef;
+            margin-bottom: 1rem;
+        }
+        .notfound-container p {
+            font-size: 1.5rem;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+        .notfound-container a {
+            display: inline-block;
+            padding: 0.7em 2em;
+            background: #5d5fef;
+            color: #fff;
+            border-radius: 7px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .notfound-container a:hover {
+            background: #4b4dbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="notfound-container">
+        <h1>404</h1>
+        <p>Sorry, the page you are looking for was not found.</p>
+        <a href="/">Go to Home</a>
+    </div>
+</body>
+</html>

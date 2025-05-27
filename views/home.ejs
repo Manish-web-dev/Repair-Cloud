@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Reparing Service </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+       <!-- header section start -->
+
+    <header>
+        <a href="#home" class="logo">Mobile Reparing Service</a>
+
+        <div id="menu-bar" class="fas fa-bars"></div>
+
+        <nav class="navbar">
+
+            <a style="--i:0" href="#home">Home</a>
+            <a style="--i:1" href="#features">features</a>
+            <a style="--i:2" href="#service">Services</a>
+            <a style="--i:3" href="#project">Projects</a>
+            <a style="--i:4" href="#team">Team</a>
+            <a style="--i:5" href="#about">About</a>
+            <a style="--i:6" href="#contact">Contact</a>
+            <a style="--i:7" href="#" id="login-btn">Login</a>
+
+        </nav>
+
+    </header>
+    <!-- header section end -->
+
+ 
+
+    <!-- home section start -->
+
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Grow your Business with us</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit possimus dicta repellendus corrupti iusto
+                laboriosam vero inven</p>
+            <a href="#" class="btn"> Discover more</a>
+        </div>
+
+        <div class="image">
+            <img src="/images/ganpati.jpg" alt="">
+
+
+        </div>
+    </section>
+    <!-- home section end -->
+
+    <!-- features section starts -->
+    <section class="features" id="features">
+
+        <h1 class="heading">Awesome features</h1>
+        <div class="box-container">
+
+            <div class="box">
+                <img src="/images/free diagnosis.png" width="60%" height="50%">
+                <h3>Focuses on free diagnosis </h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit fugiat facere tempora!</p>
+                <a href="#" class="btn">Read more</a>
+            </div>
+
+            <div class="box">
+                <img src="/images/same day repair.png" width="60%" height="50%">
+                <h3>Focuses on free diagnosis </h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit fugiat facere tempora!</p>
+                <a href="#" class="btn">Read more</a>
+            </div>
+
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="60%" height="50%">
+                <h3>Focuses on free diagnosis </h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit fugiat facere tempora!</p>
+                <a href="#" class="btn">Read more</a>
+            </div>
+            
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="60%" height="50%">
+                <h3>Focuses on free diagnosis </h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit fugiat facere tempora!</p>
+                <a href="#" class="btn">Read more</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- features section end -->
+
+    <!-- service section start -->
+    <section class="service" id="service">
+        <h1 class="heading">our services</h1>
+
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="/images/warrenty on repairs.png" width="100%" height="100%">
+                <h3>Electrician</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+
+
+        </div>
+
+    </section>
+    <!-- service section end -->
+
+    <!-- project section start -->
+
+    <section class="project" id="project">
+        <h1 class="heading">Current projects</h1>
+        <div class="box-container">
+            <% if (typeof projects !== 'undefined' && projects.filter(p => !p.completed).length > 0) { %>
+                <% projects
+                    .filter(p => !p.completed)
+                    .slice()
+                    .sort((a, b) => (a.projectNumber > b.projectNumber ? 1 : -1))
+                    .forEach(function(p) { %>
+                    <div class="box">
+                        <span class="number"><%= p.projectNumber %></span>
+                        <img src="<%= p.imageUrl ? p.imageUrl : '/images/project.avif' %>" alt="" style="width:auto; height:auto; max-width:100%; max-height:100%;">
+                        <div class="info">
+                            <h3><%= p.description %></h3>
+                            <p><%= p.date ? new Date(p.date).toISOString().slice(0,10) : '' %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div>No projects found.</div>
+            <% } %>
+        </div>
+    </section>
+
+    <section class="project" id="project">
+        <h1 class="heading">Completed projects</h1>
+        <div class="box-container">
+            <% if (typeof projects !== 'undefined' && projects.filter(p => p.completed).length > 0) { %>
+                <% projects
+                    .filter(p => p.completed)
+                    .slice()
+                    .sort((a, b) => (a.projectNumber > b.projectNumber ? 1 : -1))
+                    .forEach(function(p) { %>
+                    <div class="box">
+                        <span class="number"><%= p.projectNumber %></span>
+                        <img src="<%= p.imageUrl ? p.imageUrl : '/images/project.avif' %>" alt="" style="width:auto; height:auto; max-width:100%; max-height:100%;">
+                        <div class="info">
+                            <h3><%= p.description %></h3>
+                            <p><%= p.date ? new Date(p.date).toISOString().slice(0,10) : '' %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div>No completed projects found.</div>
+            <% } %>
+        </div>
+    </section>
+    <!-- project section end -->
+
+    <!-- team section start -->
+    <section class="team" id="team">
+        <h1 class="heading">Our team</h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="/images/logo.jpg" width="50%" height="50%" alt="">
+                <h3>Random</h3>
+                <span>Electrician</span>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim, asperiores?</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="/images/logo.jpg" width="50%" height="50%" alt="">
+                <h3>Random</h3>
+                <span>Electrician</span>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim, asperiores?</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="/images/logo.jpg" width="50%" height="50%" alt="">
+                <h3>Random</h3>
+                <span>Electrician</span>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim, asperiores?</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="/images/logo.jpg" width="50%" height="50%" alt="">
+                <h3>Random</h3>
+                <span>Electrician</span>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim, asperiores?</p>
+                <div class="share">
+                    <a href="#" class="fab fa-facebook"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+    <!-- team section end -->
+
+    <!-- Gallery Button/Box Start -->
+    <div class="gallery-link-box">
+        <a href="/gallery" class="gallery-btn">
+            <i class="fa fa-images"></i>
+            <span>Gallery</span>
+        </a>
+    </div>
+    <!-- Gallery Button/Box End -->
+
+    <!-- contact section start -->
+    <section class="contact" id="contact">
+        <h1 class="heading"> Contact Us</h1>
+        <div class="row">
+            <% if (success) { %>
+                <div style="color: green; font-weight: bold; margin-bottom: 1rem;"><%= success %></div>
+            <% } %>
+            <% if (error) { %>
+                <div style="color: red; font-weight: bold, margin-bottom  1rem;"><%= error %></div>
+            <% } %>
+            <form action="/" method="POST">
+                <div class="inputbox">
+                    <input type="text" name="Name" required>
+                    <label>Name</label>
+                </div>
+                <div class="inputbox">
+                    <input type="email" name="Email" required>
+                    <label>Email</label>
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="Phone" required>
+                    <label>Phone</label>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="Servicetype" required>
+                    <label>ServiceType</label>
+                </div>
+
+                <div class="inputbox">
+                    <textarea name="Message" cols="30" rows="10" required></textarea>
+                    <label>Message</label>
+                </div>
+                <input type="submit" class="btn" value="send message">
+            </form>
+
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.2792876287317!2d85.33482447425334!3d27.68947562628169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1963b57fdbf1%3A0xe95873d30f858aac!2s%2C%20Sansad%20Bhavan!5e1!3m2!1sen!2snp!4v1746551831182!5m2!1sen!2snp" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+    <!-- contact section end -->
+
+<!-- footer section start -->
+<div class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>About us</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur, sunt?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit labore corporis maxime mollitia. Laboriosam sequi fugiat doloremque reiciendis id officiis.</p>
+        </div>
+        
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">features</a>
+            <a href="#">Services</a>
+            <a href="#">project</a>
+            <a href="#">Team</a>
+            <a href="#">About </a>
+            <a href="#">Contact </a>
+
+           
+        
+        </div>
+
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">features</a>
+            <a href="#">Services</a>
+            <a href="#">project</a>
+            <a href="#">Team</a>
+            <a href="#">About </a>
+            <a href="#">Contact </a>
+
+            
+        </div>
+
+        <div class="box">
+            <h3>Follows us</h3>
+            <a href="#">Home</a>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter<a>
+            <a href="#">Linkedin</a>
+           
+
+            
+        </div>
+    </div>
+
+    <h1 class="credit"> &copy; copyright by <a href="#">Manish pandit</a>@2025 </h1>
+</div>
+<!-- footer section end -->
+
+<div class="login-popup" id="login-popup">
+    <form class="login-form" action="/login" method="POST">
+        <button type="button" class="close-btn" id="close-login-popup">&times;</button>
+        <h2>Login</h2>
+        <p style="text-align: center; font-size: 1.2rem; color: gray;">Only for Admin</p>
+        <% if (error) { %>
+            <div style="color: red; font-weight: bold; margin-bottom: 1rem;"><%= error %></div>
+        <% } %>
+        <% if (success) { %>
+            <div style="color: green; font-weight: bold; margin-bottom: 1rem;"><%= success %></div>
+        <% } %>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="Password">Password:</label>
+        <input type="password" id="Password" name="Password" required>
+        <button type="submit" class="btn">Login</button>
+    </form>
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
