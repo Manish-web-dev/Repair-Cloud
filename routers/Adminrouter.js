@@ -11,6 +11,7 @@ const adminPassword = "manish";
 
 // Middleware to check admin session
 function requireAdmin(req, res, next) {
+  console.log("Session in /admin:", req.session); // Debug: check session content
   if (req.session && req.session.isAdmin) {
     // Prevent browser caching for admin page
     res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");

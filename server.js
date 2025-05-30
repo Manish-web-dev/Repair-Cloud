@@ -36,7 +36,10 @@ app.use(session({
     mongoUrl: process.env.MONGO_URI,
     collectionName: "sessions"
   }),
-  cookie: { secure: process.env.NODE_ENV === "production" }
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax"
+  }
 }));
 
 // EJS setup
