@@ -10,6 +10,7 @@ import galleryRouter from "./routers/galleryrouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import MongoStore from "connect-mongo"; // <-- add this line
 
 dotenv.config();
 
@@ -26,11 +27,15 @@ const galleryDir = path.join(uploadsDir, "gallery");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 if (!fs.existsSync(galleryDir)) fs.mkdirSync(galleryDir, { recursive: true });
 
-// Add session middleware
+// Add session middleware with MongoDB store
 app.use(session({
-  secret: process.env.SESSION_SECRET || "your_secret_key", // use env var in production
+  secret: process.env.SESSION_SECRET || "your_secret_key",
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: "sessions"
+  }),
   cookie: { secure: process.env.NODE_ENV === "production" }
 }));
 
