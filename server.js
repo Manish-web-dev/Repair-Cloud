@@ -17,6 +17,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 25000;
 
+// Trust proxy for correct cookie handling behind proxies (like Render)
+app.set('trust proxy', 1); // <-- already present
+
 // ESM __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +40,7 @@ app.use(session({
     collectionName: "sessions"
   }),
   cookie: {
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production" ? true : false, // <-- already correct
     sameSite: "lax"
   }
 }));

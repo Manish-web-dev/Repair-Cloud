@@ -77,10 +77,12 @@ router.post("/login", async (req, res) => {
   try {
     if (email === adminEmail && Password === adminPassword) {
       if (req.session) req.session.isAdmin = true;
+      console.log("Login successful, session.isAdmin:", req.session.isAdmin); // <-- DEBUG LOG
       // Redirect to /admin so session is used for access
       return res.redirect("/admin");
     } else {
       if (req.session) req.session.isAdmin = false;
+      console.log("Login failed, session.isAdmin:", req.session.isAdmin); // <-- DEBUG LOG
       return res.render("home", { error: "Invalid credentials", success: null });
     }
   } catch (error) {
