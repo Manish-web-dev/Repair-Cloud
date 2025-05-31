@@ -65,19 +65,21 @@ app.use((req, res, next) => {
 
 // Home page (renders home.ejs) and always destroys session
 app.get("/", async (req, res) => {
+  const success = req.query.success || null;
+  const error = req.query.error || null;
   if (req.session && req.session.isAdmin) {
     req.session.destroy(async () => {
       try {
         const projects = await Project.find().sort({ createdAt: -1 });
         const projectsWithUrl = projects.map(p => ({
           ...p.toObject(),
-          imageUrl: p.image ? `/uploads/${p.image}` : null // <-- fix: always use /uploads/filename
+          imageUrl: p.image ? `/uploads/${p.image}` : null
         }));
         res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
         res.setHeader("Pragma", "no-cache");
         res.setHeader("Expires", "0");
         res.setHeader("Surrogate-Control", "no-store");
-        res.render("home", { success: null, error: null, projects: projectsWithUrl });
+        res.render("home", { success, error, projects: projectsWithUrl });
       } catch (err) {
         res.render("home", { success: null, error: "Failed to load projects", projects: [] });
       }
@@ -87,13 +89,13 @@ app.get("/", async (req, res) => {
       const projects = await Project.find().sort({ createdAt: -1 });
       const projectsWithUrl = projects.map(p => ({
         ...p.toObject(),
-        imageUrl: p.image ? `/uploads/${p.image}` : null // <-- fix: always use /uploads/filename
+        imageUrl: p.image ? `/uploads/${p.image}` : null
       }));
       res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
       res.setHeader("Pragma", "no-cache");
       res.setHeader("Expires", "0");
       res.setHeader("Surrogate-Control", "no-store");
-      res.render("home", { success: null, error: null, projects: projectsWithUrl });
+      res.render("home", { success, error, projects: projectsWithUrl });
     } catch (err) {
       res.render("home", { success: null, error: "Failed to load projects", projects: [] });
     }

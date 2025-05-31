@@ -25,10 +25,10 @@ html {
 
 section {
     padding: 0 7%;
-    padding-top: 7.5rem;
+    padding-top: 3.5rem;
     padding-bottom: 1.2rem;
     /* Reduced from 3rem to remove unnecessary gap below sections */
-    min-height: 100vh;
+    min-height: 50%vh;
 }
 
 .btn {
@@ -477,12 +477,17 @@ section:first-of-type {
 
 .features .box-container .box {
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Do not use space-between */
+    align-items: center;
     text-align: center;
     padding: 2rem 4rem;
     border: .1rem solid rgba(0, 0, 0, .2);
     flex: 1 1 30rem;
     position: relative;
     overflow: hidden;
+    height: 100%; /* Make all boxes equal height */
 }
 
 .features .box-container .box::before {
@@ -521,9 +526,45 @@ section:first-of-type {
 }
 
 .features .box-container .box p {
-    font-size: 1.3rem;
-    color: #666;
-    padding-bottom: 1rem;
+    flex: 0 0 auto; /*Do not grow, do not shrink*/
+    margin-bottom: 0.7rem; /* Reduce gap below paragraph */
+    width: 100%;
+    /* font-size:  1rem; ; */
+    box-sizing: border-box;
+    text-align: center;
+    overflow: visible;
+    max-height: none;
+}
+
+.features .box-container .box .btn {
+    margin-top: 0;
+    align-self: center;
+}
+
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+    .features .box-container {
+        align-items: stretch !important;
+    }
+    .features .box-container .box {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        min-height: 180px !important;
+        height: 100% !important;
+    }
+    .features .box-container .box p {
+        flex: 0 0 auto !important;
+        margin-bottom: 0.7rem !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .features .box-container .box .btn {
+        margin-top: 0 !important;
+        align-self: center !important;
+    }
 }
 
 .service {
@@ -536,52 +577,97 @@ section:first-of-type {
 
 .service .box-container {
     display: flex;
-    align-items: flex-start;
-    /* Changed from stretch to flex-start */
-    justify-content: center;
     flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
     /* Remove any gap or margin that causes wrapping issues */
 }
 
 .service .box-container .box {
-    padding: 3rem;
-    margin: 1rem;
-    flex: 1 1 340px;
-    max-width: 300px;
-    min-width: 200px;
-    min-height: 340px;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
-    align-items: center;
+    height: 100%;
+    min-height: 340px; /* Increase for more consistency */
     position: relative;
+    overflow: hidden;
+    padding: 2rem 4rem;
+    border: .1rem solid rgba(0, 0, 0, .2);
+    flex: 1 1 30rem;
+    max-width: 300px;
+    min-width: 200px;
 }
 
 .service .box-container .box h3 {
     font-size: 2.5rem;
     color: #fff;
-    padding: 1rem 0;
+    padding-bottom: 1rem;
+    margin-top: 0.5rem;
 }
 
+.service .box-container .box p,
 .service .box-container .box P {
-    font-size: 1.5rem;
-    color: #fff;
-    padding: 1rem;
-    text-align: left;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: visible;
+    max-height: none;
+    background: rgba(255,255,255,0.10);
+    border-radius: 1rem;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.3rem;
+    color: #f8f8f8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+    display: block;
     word-break: break-word;
-    white-space: normal;
 }
 
-.service .box-container .box:hover {
-    background: #fff;
+.service .box-container .box .btn {
+    margin-top: auto;
+    align-self: stretch;
+    width: 100%;
 }
 
-.service .box-container .box:hover h3 {
-    color: var(--black);
-}
-
-.service .box-container .box:hover p {
-    color: #666;
+/* --- MOBILE FIX --- */
+@media (max-width: 800px) {
+    .service .box-container {
+        align-items: stretch !important;
+    }
+    .service .box-container .box {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        min-height: 220px !important;
+        height: 100% !important;
+        position: relative !important;
+    }
+    .service .box-container .box p,
+    .service .box-container .box P {
+        flex-grow: 1 !important;
+        flex-shrink: 1 !important;
+        flex-basis: 0 !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        text-align: center;
+        overflow: visible !important;
+        max-height: none !important;
+    }
+    .service .box-container .box .btn {
+        margin-top: auto !important;
+        align-self: stretch !important;
+        width: 100% !important;
+    }
 }
 
 .project {
@@ -751,7 +837,7 @@ section:first-of-type {
     margin: 1rem;
     text-align: center;
     padding-top: 4rem;
-    padding-bottom: 8rem; /* Ensure enough space for .share at the bottom */
+    padding-bottom: 5rem; /* Ensure enough space for .share at the bottom */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -780,10 +866,8 @@ section:first-of-type {
     padding: 1rem 2.5rem;
     font-size: 1.3rem;
     color: #666;
-    text-align: left;
-    margin-bottom: 10px;
+    text-align: center;
     word-break: break-word;
-    white-space: normal;
 }
 
 .team .box-container .box .share {
@@ -794,6 +878,8 @@ section:first-of-type {
     background: var(--orange);
     display: flex;
     justify-content: center;
+    height: 5rem; /* Fixed height to match padding-bottom */
+    align-items: center;
 }
 
 .team .box-container .box .share a {
@@ -1154,6 +1240,7 @@ textarea {
     section {
         padding-bottom: 0.2rem !important;
         min-height: unset !important;
+        padding-top: 3.5rem ;
     }
 
     /* Make boxes smaller and fit 2-3 per row */
@@ -1198,6 +1285,13 @@ textarea {
         display: flex;
         flex-direction: column;
     }
+
+    .service .box-container .box p {
+        font-size: 1.2rem !important;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    
 
     .project .box-container {
         display: flex !important;
@@ -1248,11 +1342,13 @@ textarea {
 
     .team .box-container .box {
         padding-top: 0.5rem !important;
-        padding-bottom: 1rem !important;
+        padding-bottom: 5rem !important; /* Match .share height for mobile */
         max-width: 48vw !important;
         width: 48vw !important;
     }
-
+    .team .box-container .box .share {
+        height: 5rem !important; /* Ensure fixed height on mobile */
+    }
     .team .box-container .box img {
         height: 50px !important;
         width: 50px !important;
@@ -1261,7 +1357,7 @@ textarea {
     .team .box-container .box h3 {
         font-size: 1.1rem;
     }
-
+    
     .gallery-link-box {
         margin: 1rem 0 1rem 0;
     }
@@ -1269,5 +1365,45 @@ textarea {
     .gallery-btn {
         padding: 0.7rem 1rem;
         font-size: 1rem;
+    }
+
+    .features .box-container .box {
+        min-height: 150px !important;
+        height: 100% !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center!important;
+        display: flex !important;
+    }
+    .features .box-container .box p {
+        flex: 1 1 auto;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .features .box-container .box .btn {
+        margin-top: 0 !important;
+        align-self: center;
+    }
+    .service .box-container .box {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: stretch !important;
+        min-height: 180px !important;
+        height: 100% !important;
+    }
+    .service .box-container .box p,
+    .service .box-container .box P {
+        flex: 1 1 auto !important;
+        margin-bottom: 1rem !important;
+        width: 100% !important;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .service .box-container .box .btn {
+        margin-top: 0 !important;
+        align-self: center !important;
     }
 }

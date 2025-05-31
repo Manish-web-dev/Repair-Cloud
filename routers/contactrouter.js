@@ -9,7 +9,12 @@ router.post('/', async (req, res) => {
     const { Name, Email, Phone, Servicetype, Message } = req.body;
     // Basic field check
     if (!Name || !Email || !Phone || !Servicetype || !Message) {
-      return res.status(400).send('All fields are required');
+      // AJAX: send plain text error
+      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+        return res.status(400).send('All fields are required');
+      }
+      // Redirect back with error message
+      return res.redirect('/?error=' + encodeURIComponent('All fields are required'));
     }
     // Save contact form submission to the database
     const newContact = new Contact({
@@ -24,10 +29,20 @@ router.post('/', async (req, res) => {
     const subject = 'Contact Form Submission';
     const text = `You have received a new message from \n${Name} \n (${Email})\n(${Phone}) \n (${Servicetype}):\n${Message}`;
     await sendEmail('sanjeetkumarthakur864@gmail.com', subject, text); // Use sendEmail function
-    res.send('Message send successfully');
+    // AJAX: send plain text success
+    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      return res.send('Message sent successfully');
+    }
+    // Redirect back with success message
+    res.redirect('/?success=' + encodeURIComponent('Message sent successfully'));
   } catch (error) {
     console.error('Error processing contact form submission:', error);
-    res.status(500).send('Failed to process contact form submission');
+    // AJAX: send plain text error
+    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      return res.status(500).send('Failed to process contact form submission');
+    }
+    // Redirect back with error message
+    res.redirect('/?error=' + encodeURIComponent('Failed to process contact form submission'));
   }
 });
 

@@ -375,9 +375,132 @@ input:-webkit-autofill:focus {
     margin-top: 24px;
 }
 
-/* If you want a horizontal gap for row layout, you can also add: */
-/*
-.box-container {
-    gap: 24px;
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 800px) {
+    .nav_bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 1rem 0.5rem;
+    }
+    .nav_logo {
+        font-size: 1.2rem;
+    }
+    .nav_btns {
+        gap: 1rem;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .container {
+        padding: 1rem 0.5rem;
+    }
+    .table {
+        margin-top: 1rem;
+        overflow-x: auto;
+    }
+    table {
+        font-size: 0.95rem;
+    }
+    th, td {
+        padding: 6px 4px;
+    }
+    td:nth-child(3) {
+        max-width: 120px;
+        font-size: 0.92rem;
+    }
+    .image-preview {
+        width: 60px;
+        height: 60px;
+    }
+    .btn, .btn_primary, .btn_secondary, .property-edit, .property-delete,
+    .edit-btn, .delete-btn, .complete-btn {
+        font-size: 0.85rem !important;
+        padding: 0.3em 0.7em !important;
+        min-width: 0 !important;
+    }
+    td > .btn, td > .btn_primary, td > .btn_secondary, td > .edit-btn, td > .delete-btn, td > .complete-btn {
+        margin: 0 2px !important;
+    }
+    .modern-modal-card, .modal-content {
+        max-width: 98vw;
+        padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    }
+    .modern-modal-title {
+        font-size: 1.1rem;
+    }
+    .modern-btn {
+        font-size: 1rem;
+        padding: 0.7em 0;
+    }
+    .modern-input, .modern-input[type="date"] {
+        font-size: 0.95rem;
+        padding: 0.7em 0.7em;
+    }
+    .modern-label, .modern-label-file {
+        font-size: 0.92rem;
+    }
+    .box-container .box:not(:first-child) {
+        margin-top: 12px;
+    }
 }
-*/
+
+@media (max-width: 500px) {
+    .nav_bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+        padding: 0.7rem 0.2rem;
+    }
+    .container {
+        padding: 0.5rem 0.2rem;
+    }
+    table {
+        font-size: 0.85rem;
+    }
+    th, td {
+        padding: 4px 2px;
+    }
+    td:nth-child(3) {
+        max-width: 70px;
+        font-size: 0.85rem;
+    }
+    .image-preview {
+        width: 40px;
+        height: 40px;
+    }
+    .btn, .btn_primary, .btn_secondary, .property-edit, .property-delete,
+    .edit-btn, .delete-btn, .complete-btn {
+        font-size: 0.75rem !important;
+        padding: 0.2em 0.5em !important;
+        min-width: 0 !important;
+        
+    }
+    td > .btn, td > .btn_primary, td > .btn_secondary, td > .edit-btn, td > .delete-btn, td > .complete-btn {
+        margin: 0 1px !important;
+    }
+    .modern-modal-card, .modal-content {
+        max-width: 99vw;
+        padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    }
+    .modern-modal-title {
+        font-size: 1rem;
+    }
+    .modern-btn {
+        font-size: 0.9rem;
+        padding: 0.5em 0;
+    }
+    .modern-input, .modern-input[type="date"] {
+        font-size: 0.85rem;
+        padding: 0.5em 0.5em;
+    }
+    .modern-label, .modern-label-file {
+        font-size: 0.85rem;
+    }
+    .box-container .box:not(:first-child) {
+        margin-top: 8px;
+    }
+    /* Make table horizontally scrollable on very small screens */
+    .table {
+        overflow-x: auto;
+    }
+}
